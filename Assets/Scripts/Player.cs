@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     public float forwardAccelDuration = 1.0f;
     public float forwardDeaccel = 40.0f;
     public float forwardDeaccelDuration = 0.5f;
+
+    //public float forwardAccelStrength = 10.0f;
     //public float forwardAccelDuration = 1.0f;
     //public float forwardAccelCooldownDuration = 0.5f;
     //public float speedUpBurst = 5.0f;
@@ -19,20 +21,14 @@ public class Player : MonoBehaviour
 
     [Header("Side Motion")]
     public float sideStep = 2.5f;
-    public float sideVelocity = 0.5f;
+    public float sideVelocity = 10.0f;
     public float sideMax = 5.0f;
 
-
-    // TODO remove
-    [Header("Legacy - Side Motion")]
-    public float xVelocity = 15.0f;
-    public float xMin = -5.0f;
-    public float xMax = 5.0f;
-    public float xStep = 2.5f;
-
     // Sideways motion fields
-    private float sideTarget = 0.0f;
-    private float sideTimer = 0.0f;
+    private float _sideStart = 0.0f;
+    private float _sideTarget = 0.0f;
+    private float _sideTotalTime = 0.0f;
+    private float _sideTime = 0.0f;
 
     // Acceleration fields
     private float _accelTime = 0.0f;
@@ -44,9 +40,10 @@ public class Player : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _currentForwardVelocity = forwardBaseVelocity;
+        _rigidbody.velocity = Vector3.forward * forwardBaseVelocity;
     }
 
+    
     // Update is called once per frame
     void Update()
     {
@@ -62,71 +59,102 @@ public class Player : MonoBehaviour
         // TODO modify the camera controls so that the motion is more fluid when
         // the vehicle moves
 
+        //Vector3 tempPosition = transform.position;
+        ////Vector3 velocity = new Vector3(0, _rigidbody.velocity.y, 0);
 
-        Vector3 velocity = new Vector3(0, _rigidbody.velocity.y, 0);
+        //// Check for lateral motion
+        //float newSideTarget = _sideTarget;
+        //if (Input.GetKeyDown("left"))
+        //{
+        //    newSideTarget = Mathf.Clamp(_sideTarget - sideStep, -sideMax, sideMax);
+        //}
 
-        // Check for lateral motion
-        if (Input.GetKeyDown("left"))
-        {
-            sideTarget = Mathf.Clamp(sideTarget - sideStep, -sideMax, sideMax);
-            if (transform.position.x >= xMin)
-            {
-                velocity.x -= xVelocity;
-            }
-        }
+        //if (Input.GetKeyDown("right"))
+        //{
+        //    newSideTarget = Mathf.Clamp(_sideTarget + sideStep, -sideMax, sideMax);
+        //}
 
-        if (Input.GetKeyDown("right"))
-        {
-            if (transform.position.x <= xMax)
-            {
-                velocity.x += xVelocity;
-            }
-        }
+        //// Update the side motion targets
+        //if (newSideTarget != _sideTarget)
+        //{
+        //    _sideStart = transform.position.x;
+        //    _sideTarget = newSideTarget;
+        //    _sideTotalTime = Mathf.Abs(_sideTarget - transform.position.x) / sideVelocity;
+        //    _sideTime = _sideTotalTime;
+        //}
+
+        //// Perform side motion
+        //if (_sideTime > 0.0f)
+        //{
+        //    tempPosition.x = Mathf.Lerp(_sideTarget, _sideStart, _sideTime / _sideTotalTime);
+        //    //transform.position = newPosition;
+        //    _sideTime -= Time.deltaTime;
+        //}
+
+
+
 
         // Check for acceleration motion
-        if (Input.GetKeyDown("up"))
-        {
-            _accelTime = forwardAccelDuration;
-        }
+        //if (Input.GetKeyDown("up"))
+        //{
+        //    _accelTime = forwardAccelDuration;
+        //}
 
-        if (Input.GetKeyDown("down"))
-        {
-            _deaccelTime = forwardDeaccelDuration;
-        }
+        //if (Input.GetKeyDown("down"))
+        //{
+        //    _deaccelTime = forwardDeaccelDuration;
+        //}
 
-        // Add any acceleration
-        if (_accelTime > 0.0f)
-        {
-            _currentForwardVelocity = Mathf.Clamp(
-                _currentForwardVelocity + forwardAccel * Time.deltaTime,
-                forwardVelocityMin,
-                forwardVelocityMax
-                );
-            _accelTime -= Time.deltaTime;
-        }
+        //// Add any acceleration
+        //if (_accelTime > 0.0f)
+        //{
+        //    _currentForwardVelocity = Mathf.Clamp(
+        //        _currentForwardVelocity + forwardAccel * Time.deltaTime,
+        //        forwardVelocityMin,
+        //        forwardVelocityMax
+        //        );
+        //    _accelTime -= Time.deltaTime;
+        //}
 
-        // Perform any deacceleration
-        if (_deaccelTime > 0.0f)
-        {
-            _currentForwardVelocity = Mathf.Clamp(
-                _currentForwardVelocity - forwardDeaccel * Time.deltaTime,
-                forwardVelocityMin,
-                forwardVelocityMax
-                );
-            _deaccelTime -= Time.deltaTime;
-        }
+        //// Perform any deacceleration
+        //if (_deaccelTime > 0.0f)
+        //{
+        //    _currentForwardVelocity = Mathf.Clamp(
+        //        _currentForwardVelocity - forwardDeaccel * Time.deltaTime,
+        //        forwardVelocityMin,
+        //        forwardVelocityMax
+        //        );
+        //    _deaccelTime -= Time.deltaTime;
+        //}
 
-        velocity.z = _currentForwardVelocity;
-        _rigidbody.velocity = velocity;
+        //tempPosition.z += _currentForwardVelocity * Time.deltaTime;
+        //transform.position = tempPosition;
+
+        //velocity.z = _currentForwardVelocity;
+        //_rigidbody.velocity = velocity;
     }
+
+    private void FixedUpdate()
+    {
+        if (_rigidbody.velocity.magnitude == 0.0)
+        {
+            _rigidbody.velocity = Vector3.forward * forwardBaseVelocity;
+        }
+        else if (_rigidbody.velocity.magnitude < forwardBaseVelocity)
+        {
+            _rigidbody.velocity = _rigidbody.velocity.normalized * forwardBaseVelocity;
+        }
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
         NavSegment navSeg;
         if (null != (navSeg = other.gameObject.GetComponent<NavSegment>()))
         {
+            Debug.Log("Exited");
             SceneController controller = GameObject.FindObjectOfType<SceneController>();
-            controller?.NavSegmentExited(other.gameObject.GetComponent<NavSegment>());
+            controller?.NavSegmentExited(navSeg);
         }
     }
 }

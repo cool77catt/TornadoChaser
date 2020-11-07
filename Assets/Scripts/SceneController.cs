@@ -40,13 +40,19 @@ public class SceneController : MonoBehaviour
         }
 
         // Position the player on the first segment
-        NavSegment refSeg = _activeNavSegments[0];
+        Vector3 playerPosition = (_activeNavSegments[1].transform.position
+            + _activeNavSegments[0].transform.position) / 2.0f;
         Vector3 playerSize = _player.GetComponent<Collider>().bounds.size;
-        _player.transform.position = new Vector3(
-            refSeg.transform.position.x,
-            playerSize.y / 2.0f,
-            refSeg.transform.position.z / 2.0f
-            ); ;
+        playerPosition.y = playerSize.y / 1.5f;
+        _player.transform.position = playerPosition;
+
+        //NavSegment refSeg = _activeNavSegments[0];
+        //Vector3 playerSize = _player.GetComponent<Collider>().bounds.size;
+        //_player.transform.position = new Vector3(
+        //    refSeg.transform.position.x,
+        //    playerSize.y / 2.0f,
+        //    refSeg.transform.position.z / 2.0f
+        //    ); ;
 
         // Position the tornado
         _tornado.transform.position = Vector3.forward * initialDistance;
@@ -75,7 +81,7 @@ public class SceneController : MonoBehaviour
             Vector3 colliderPosition = prevSeg.transform.position + colliders[0].center;
 
             // Position the new segment to be butt-up to the previous one
-            Vector3 newPosition = seg.transform.position;
+            Vector3 newPosition = prevSeg.transform.position;
             newPosition.z = colliderPosition.z;
             seg.transform.position = newPosition;
         }
