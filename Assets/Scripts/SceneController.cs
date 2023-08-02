@@ -46,14 +46,6 @@ public class SceneController : MonoBehaviour
         playerPosition.y = playerSize.y / 1.5f;
         _player.transform.position = playerPosition;
 
-        //NavSegment refSeg = _activeNavSegments[0];
-        //Vector3 playerSize = _player.GetComponent<Collider>().bounds.size;
-        //_player.transform.position = new Vector3(
-        //    refSeg.transform.position.x,
-        //    playerSize.y / 2.0f,
-        //    refSeg.transform.position.z / 2.0f
-        //    ); ;
-
         // Position the tornado
         _tornado.transform.position = Vector3.forward * initialDistance;
     }

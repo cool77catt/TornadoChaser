@@ -329,7 +329,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2a6c8fdceeee488418663a46854ab545, type: 2}
     - target: {fileID: 6400000, guid: 80492071631ffe442bdaacf7b2e4a9f3, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6400000, guid: 80492071631ffe442bdaacf7b2e4a9f3, type: 3}
       propertyPath: m_Convex
@@ -337,7 +337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6400002, guid: 80492071631ffe442bdaacf7b2e4a9f3, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6400002, guid: 80492071631ffe442bdaacf7b2e4a9f3, type: 3}
       propertyPath: m_Convex
@@ -345,7 +345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6400004, guid: 80492071631ffe442bdaacf7b2e4a9f3, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6400004, guid: 80492071631ffe442bdaacf7b2e4a9f3, type: 3}
       propertyPath: m_Convex
@@ -353,7 +353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6400006, guid: 80492071631ffe442bdaacf7b2e4a9f3, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6400006, guid: 80492071631ffe442bdaacf7b2e4a9f3, type: 3}
       propertyPath: m_Convex
@@ -361,7 +361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6400008, guid: 80492071631ffe442bdaacf7b2e4a9f3, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6400008, guid: 80492071631ffe442bdaacf7b2e4a9f3, type: 3}
       propertyPath: m_Convex

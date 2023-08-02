@@ -1,29 +1,16 @@
-# README #
+# Overview
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Embark on an Epic Tornado Chase in this Heart-Pounding Infinite Runner, Powered by Unity! Get Ready to Dodge Debris, Outrun the Twister, and Capture Jaw-Dropping Photo and Video Tokens to Skyrocket Your Score!
 
-### What is this repository for? ###
+# Screenshots
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+![Example Screenshot](ReadmeAssets/example_setup.png)
 
-### How do I get set up? ###
+![Example Screenshot](ReadmeAssets/gameplay.png)
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+# Upcoming Work
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* Add in obstructions
+* Tokens and score trackingn
+* Blender assets
+* Different tornadoes/levels

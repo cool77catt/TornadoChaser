@@ -47,49 +47,40 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // TODO change controls so the arrows are treating as swipes on a phone
-        // One swipe triggers motion in that direction
-        // For forward motion, each swipe adds to the acceleration,
-        // so multiple swipes in a row create a much faster acceleration.
-        // Each accel/deaccel motion should result in a set new velocity
-        // the accel and deaccel values should be equal. A swipe up and a
-        // corresponding swipe down should take you back to the original
-        // velocity.
-
         // TODO modify the camera controls so that the motion is more fluid when
         // the vehicle moves
 
-        //Vector3 tempPosition = transform.position;
-        ////Vector3 velocity = new Vector3(0, _rigidbody.velocity.y, 0);
+        
+        Vector3 tempPosition = transform.position;
 
-        //// Check for lateral motion
-        //float newSideTarget = _sideTarget;
-        //if (Input.GetKeyDown("left"))
-        //{
-        //    newSideTarget = Mathf.Clamp(_sideTarget - sideStep, -sideMax, sideMax);
-        //}
+        // Check for lateral motion
+        float newSideTarget = _sideTarget;
+        if (Input.GetKeyDown("left"))
+        {
+            newSideTarget = Mathf.Clamp(_sideTarget - sideStep, -sideMax, sideMax);
+        }
 
-        //if (Input.GetKeyDown("right"))
-        //{
-        //    newSideTarget = Mathf.Clamp(_sideTarget + sideStep, -sideMax, sideMax);
-        //}
+        if (Input.GetKeyDown("right"))
+        {
+            newSideTarget = Mathf.Clamp(_sideTarget + sideStep, -sideMax, sideMax);
+        }
 
-        //// Update the side motion targets
-        //if (newSideTarget != _sideTarget)
-        //{
-        //    _sideStart = transform.position.x;
-        //    _sideTarget = newSideTarget;
-        //    _sideTotalTime = Mathf.Abs(_sideTarget - transform.position.x) / sideVelocity;
-        //    _sideTime = _sideTotalTime;
-        //}
+        // Update the side motion targets
+        if (newSideTarget != _sideTarget)
+        {
+            _sideStart = transform.position.x;
+            _sideTarget = newSideTarget;
+            _sideTotalTime = Mathf.Abs(_sideTarget - transform.position.x) / sideVelocity;
+            _sideTime = _sideTotalTime;
+        }
 
-        //// Perform side motion
-        //if (_sideTime > 0.0f)
-        //{
-        //    tempPosition.x = Mathf.Lerp(_sideTarget, _sideStart, _sideTime / _sideTotalTime);
-        //    //transform.position = newPosition;
-        //    _sideTime -= Time.deltaTime;
-        //}
+        // Perform side motion
+        if (_sideTime > 0.0f)
+        {
+            tempPosition.x = Mathf.Lerp(_sideTarget, _sideStart, _sideTime / _sideTotalTime);
+            //transform.position = newPosition;
+            _sideTime -= Time.deltaTime;
+        }
 
 
 
@@ -127,8 +118,7 @@ public class Player : MonoBehaviour
         //    _deaccelTime -= Time.deltaTime;
         //}
 
-        //tempPosition.z += _currentForwardVelocity * Time.deltaTime;
-        //transform.position = tempPosition;
+        transform.position = tempPosition;
 
         //velocity.z = _currentForwardVelocity;
         //_rigidbody.velocity = velocity;
